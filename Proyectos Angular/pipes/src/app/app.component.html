@@ -1,0 +1,107 @@
+<h1>pipes <small>Angular</small></h1>
+<hr>
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th>Variable</th>
+        <th>Pipe</th>
+        <th>Salida</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{nombre}}</td>
+        <td>uppercase</td>
+        <td>{{nombre|uppercase}}</td>
+      </tr>
+      <tr>
+        <td>{{nombre}}</td>
+        <td>lowercase</td>
+        <td>{{nombre|lowercase}}</td>
+      </tr>
+      <tr>
+        <td>{{nombre}}</td>
+        <td>slice:3</td>
+        <td>{{nombre|slice:3}}</td>
+      </tr>
+      <tr>
+        <td>{{nombre}}</td>
+        <td>slice:0:3</td>
+        <td>{{nombre|slice:0:3}}</td>
+      </tr>
+      <tr>
+        <td>{{ejemploarray}}</td>
+        <td>array:1:5</td>
+        <td>{{ejemploarray|slice:1:5}}</td>
+      </tr>
+      <tr>
+        <td>{{PI}}</td>
+        <td>number:'3.0-0'</td>
+        <td>{{PI|number:'3.0-0'}}</td>
+      </tr>
+      <tr>
+        <td>{{PI}}</td>
+        <td>number</td>
+        <td>{{PI|number:'.0-2'}}</td>
+      </tr>
+      <tr>
+        <td>{{porcentaje}}</td>
+        <td>number</td>
+        <td>{{porcentaje|percent}}</td>
+      </tr>
+      <tr>
+        <td>{{porcentaje}}</td>
+        <td>number</td>
+        <td>{{porcentaje|percent:'2.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>{{salario}}</td>
+        <td>currency</td>
+        <td>{{salario|currency}}</td>
+      </tr>
+      <tr>
+        <td>{{salario}}</td>
+        <td>currency</td>
+        <td>{{salario|currency:'CAD$ ':'symbol':'.0-0'}}</td>
+      </tr>
+      <tr>
+        <td>{{valorPromesa}}</td>
+        <td>async</td>
+        <td>{{valorPromesa|async}}</td>
+      </tr>
+      <tr>
+        <td>{{fecha}}</td>
+        <td>async</td>
+        <td>{{fecha|date:'medium'}}</td>
+      </tr>
+      <tr>
+        <td>{{fecha}}</td>
+        <td>async</td>
+        <td>{{fecha|date:'short'}}</td>
+      </tr>
+      <tr>
+        <td>{{nombre2}}</td>
+        <td>async</td>
+        <td>{{nombre|capitalizado}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+    <h4>Slice</h4>
+    <ul>
+      <li *ngFor="let item of ejemploarray| slice:2:20">{{item}}</li>
+
+    </ul>
+    <h3>JSON</h3>
+    <hr>
+    <div class="row">
+      <div class="col">
+        {{heroe|json}}
+
+      </div>
+
+    </div>
+  </div>
+</div>
