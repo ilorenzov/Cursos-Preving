@@ -1,19 +1,39 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../services/spotify.service';
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styles: []
 })
-export class HomeComponent{
+export class HomeComponent {
 
-  nuevasCanciones: any = [];
+  nuevasCanciones: any[] = [];
+  loading: boolean;
 
-  constructor(private sp: SpotifyService) {
-    // @ts-ignore
-    this.sp.getNewReleases().subscribe((data: any) => {
-      this.nuevasCanciones = data;
-    });
+  error: boolean;
+  mensajeError: string;
+
+  constructor( private spotify: SpotifyService ) {
+
+    this.loading = true;
+    this.error = false;
+
+    this.spotify.getNewReleases()
+        .subscribe( (data: any) => {
+          this.nuevasCanciones = data;
+          this.loading = false;
+        }, ( errorServicio ) => {
+
+          this.loading = false;
+          this.error = true;
+          console.log(errorServicio);
+          this.mensajeError = errorServicio.error.error.message;
+
+        });
+
   }
+
+
+
 }

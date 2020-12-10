@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +9,48 @@ import {map} from 'rxjs/operators';
 export class SpotifyService {
 
   constructor(private http: HttpClient) {
-    console.log('SpotifyService listo');
-  }
-  getNewReleases() {
-    const headers = new HttpHeaders({
-      'Authorization': 'BQBVlIfp47MBxY2xbmaTysHrxlMJG_KDeK2FdNyN3RYvIPpo2XWoGa8S_4m5UrPSwmVj7HXG2w5QySGylkA'
-    });
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', {headers}).pipe(map(data => {
-      return data['albums'].items;
-    }));
+    console.log('Spotify Service Listo');
   }
 
-  getArtista(termino: string) {
+  getQuery( query: string ) {
+
+    const url = `https://api.spotify.com/v1/${ query }`;
+
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer BQBVlIfp47MBxY2xbmaTysHrxlMJG_KDeK2FdNyN3RYvIPpo2XWoGa8S_4m5UrPSwmVj7HXG2w5QySGylkA'
+      'Authorization': 'Bearer BQBTFJ1Z6shdivPPjBrx4DytnCoeOSTPNfbP1ZM111qjbSJrf7q5LYywOAHqRAN1Fg8pVznkDVluMXx0Hf0'
     });
-    return this.http.get(`https://api.spotify.com/v1/search?q=${termino}&type=artist`, {headers}).pipe(map(data => data['artists'].items));
+
+    return this.http.get(url, { headers });
+
   }
+
+
+  getNewReleases() {
+
+    return this.getQuery('browse/new-releases?limit=20')
+              .pipe( map( data => data['albums'].items ));
+
+  }
+
+  getArtistas( termino: string ) {
+
+    return this.getQuery(`search?q=${ termino }&type=artist&limit=15`)
+                .pipe( map( data => data['artists'].items));
+
+  }
+
+  getArtista( id: string ) {
+
+    return this.getQuery(`artists/${ id }`);
+                // .pipe( map( data => data['artists'].items));
+
+  }
+
+  getTopTracks( id: string ) {
+
+    return this.getQuery(`artists/${ id }/top-tracks?country=us`)
+                .pipe( map( data => data['tracks']));
+
+  }
+
 }
