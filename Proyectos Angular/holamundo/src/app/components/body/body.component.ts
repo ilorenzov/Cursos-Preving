@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BodyComponent implements OnInit {
   mostrar = true;
-  frase: any = {mensaje: 'Avi la trampita', autor: 'Avi'};
+  frase: any = {mensaje: 'HOLA MUNDO ', autor: 'Nacho'};
   personajes: string[] = ['spiderman', 'venom', 'octopus'];
   constructor() { }
   ngOnInit(): void {
